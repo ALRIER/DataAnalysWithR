@@ -128,6 +128,11 @@ ggplot(mtcars, aes(mpg, 0)) +
 # The Vocab dataset provided contains the years of education and vocabulary
 # test scores from respondents to US General Social Surveys from 1972-2004.
 
+ggplot(Vocab, aes(education, vocabulary)) +
+   # Set the shape to 1
+   geom_jitter(alpha = 0.2, shape=1)
+
+
 
 
 
