@@ -132,6 +132,193 @@ ggplot(Vocab, aes(education, vocabulary)) +
    # Set the shape to 1
    geom_jitter(alpha = 0.2, shape=1)
 
+#--------------------------- HISTOGRAMS ---------------------------------------
+#mtcars is preatty popular database.
+# Plot mpg
+ggplot(mtcars, aes(mpg)) +
+   # Set the shape to 1
+   geom_histogram(alpha = 0.2, shape=1)
+#Changing configuration on the histogram
+ggplot(mtcars, aes(mpg)) +
+   # Set the binwidth to 1
+   geom_histogram(binwidth = 1)
+#usando ..density.. en la variable "Y" de un histograma puedo mostrar
+#las densidades de frecuencias del histograma en la vairiable X
+# Map y to ..density..
+ggplot(mtcars, aes(mpg, ..density..)) +
+   geom_histogram(binwidth = 1)
+#Now they asked me to change the color for a new one wich has been already
+#defined for them.
+datacamp_light_blue <- "#51A8C9"
+
+ggplot(mtcars, aes(mpg, ..density..)) +
+   # Set the fill color to datacamp_light_blue
+   geom_histogram(binwidth = 1, fill=datacamp_light_blue)
+
+#---------------------- Positions in histograms -------------------------------
+# Here, we'll examine the various ways of applying positions to histograms.
+# geom_histogram(), a special case of geom_bar(), has a position argument
+# that can take on the following values:
+#
+# stack (the default): Bars for different groups are stacked on top of each
+# other.
+# dodge: Bars for different groups are placed side by side.
+# fill: Bars for different groups are shown as proportions.
+# identity: Plot the values as they appear in the dataset.
+
+# Update the aesthetics so the fill color is by fam
+ggplot(mtcars, aes(mpg, fill = fam)) +
+   geom_histogram(binwidth = 1)
+# Update the histogram layer to position the bars side-by-side, that is,
+# "dodge".
+ggplot(mtcars, aes(mpg, fill = fam)) +
+   # Change the position to dodge
+   geom_histogram(binwidth = 1, position="dodge")
+#Update the histogram layer so the bars' positions "fill" the y-axis.
+ggplot(mtcars, aes(mpg, fill = fam)) +
+   # Change the position to fill
+   geom_histogram(binwidth = 1, position = "fill")
+# Update the histogram layer so bars are top of each other, using the
+# "identity" position. So each bar can be seen, set alpha to 0.4.
+ggplot(mtcars, aes(mpg, fill = fam)) +
+   # Change the position to identity, with transparency 0.4
+   geom_histogram(binwidth = 1, position = "identity", alpha=0.4)
+
+#--------------------------- BARPLOTS -----------------------------------------
+
+# Position in bar and col plots
+# Let's see how the position argument changes geom_bar().
+#
+# We have three position options:
+#
+# stack: The default
+# dodge: Preferred
+# fill: To show proportions
+# While we will be using geom_bar() here, note that the function geom_col()
+# is just geom_bar() where both the position and stat arguments are set to
+# "identity". It is used when we want the heights of the bars to represent
+# the exact values in the data.
+#
+# In this exercise, you'll draw the total count of cars having a given number
+# of cylinders (fcyl), according to manual or automatic transmission type (fam).
+
+#Using mtcars, plot fcyl, filled by fam.
+#Add a bar layer using geom_bar().
+# Plot fcyl, filled by fam
+ggplot(mtcars, aes(fcyl, fill = fam)) +
+   # Add a bar layer
+   geom_bar(binwidth = 1, position = "identity", alpha=0.4)
+
+# Set the bar position argument to "fill".
+ggplot(mtcars, aes(fcyl, fill = fam)) +
+   # Set the position to "fill"
+   geom_bar(position = "dodge")
+
+#--------------------------Overlapping bar plots-------------------------------
+
+# You can customize bar plots further by adjusting the dodging so that your
+# bars partially overlap each other. Instead of using position = "dodge",
+# you're going to use position_dodge(), like you did with position_jitter()
+# in the the previous exercises. Here, you'll save this as an object, posn_d,
+# so that you can easily reuse it.
+
+# Remember, the reason you want to use position_dodge() (and position_jitter())
+# is to specify how much dodging (or jittering) you want.
+#
+# For this example, you'll use the mtcars dataset.
+
+# Use the functional form of the bar position: replace "dodge" with a call
+# to position_dodge().
+# Set its width to 0.2.
+ggplot(mtcars, aes(cyl, fill = fam)) +
+   # Change position to use the functional form, with width 0.2
+   geom_bar(position = position_dodge(width=0.2))
+#Set the bar transparency level of the bars to 0.6.
+ggplot(mtcars, aes(cyl, fill = fam)) +
+   # Set the transparency to 0.6
+   geom_bar(position = position_dodge(width = 0.2), alpha=0.6)
+
+#----------------Bar plots: sequential color palette---------------------------
+
+# In this bar plot, we'll fill each segment according to an ordinal variable.
+# The best way to do that is with a sequential color palette.
+#
+# Here's an example of using a sequential color palette with the mtcars dataset:
+#
+#    ggplot(mtcars, aes(fcyl, fill = fam)) +
+#    geom_bar() +
+#    scale_fill_brewer(palette = "Set1")
+# In the exercise, you'll use similar code on the the Vocab dataset.
+# Both datasets are ordinal.
+
+# Plot the Vocab dataset, mapping education onto x and vocabulary onto fill.
+# Plot education, filled by vocabulary
+ggplot(Vocab, aes(education, fill = vocabulary)) +
+   # Add a bar layer with position "fill"
+   geom_bar(position ="fill")
+#Add a brewer fill scale, using the default palette (don't pass any arguments).
+#Notice how this generates a warning message and an incomplete plot.
+# Plot education, filled by vocabulary
+ggplot(Vocab, aes(education, fill = vocabulary)) +
+   # Add a bar layer with position "fill"
+   geom_bar(position = "fill") +
+   # Add a brewer fill scale with default palette
+   #----> el resultado es bien interesante
+   scale_fill_brewer()
+
+#------------------------  Basic line plots  ---------------------------------
+
+# Here, we'll use the economics dataset to make some line plots.
+# The dataset contains a time series for unemployment and population
+# statistics from the Federal Reserve Bank of St. Louis in the United States.
+# The data is contained in the ggplot2 package.
+#
+# To begin with, you can look at how the median unemployment time and the
+# unemployment rate (the number of unemployed people as a proportion of the
+# population) change over time.
+#
+# Print the head of the economics dataset.
+# Plot unemploy vs. date as a line plot.
+# Print the head of economics
+print(head(economics))
+# Using economics, plot unemploy vs. date
+ggplot(economics, aes(date, unemploy))+
+   # Make it a line plot
+   geom_line()
+# Change the y-axis to the proportion of the population that is unemployed
+ggplot(economics, aes(date, unemploy/pop)) +
+   geom_line()
+
+#-----------------------  Multiple time series -------------------------------
+#
+# We already saw how the form of your data affects how you can plot it.
+# Let's explore that further with multiple time series. Here, it's important
+# that all lines are on the same scale, and if possible, on the same plot.
+#
+# fish.species contains the global capture rates of seven salmon species
+# from 1950–2010. Each variable (column) is a Salmon species and each
+# observation (row) is one year. fish.tidy contains the same data, but in
+# three columns: Species, Year, and Capture (i.e. one variable per column).
+#
+# Use str() in the console to examine the structure of both fish.species and
+# fish.tidy.
+# Plot the Rainbow Salmon time series
+ggplot(fish.species, aes(x = Year, y = Rainbow)) +
+   geom_line()
+
+# Plot the Pink Salmon time series
+ggplot(fish.species, aes(x = Year, y = Pink)) +
+   geom_line()
+
+# Plot multiple time-series by grouping by species
+ggplot(fish.tidy, aes(Year, Capture)) +
+   geom_line(aes(group = Species))
+
+# Plot multiple time-series by coloring by species
+ggplot(fish.tidy, aes(Year, Capture, color = Species)) +
+   geom_line(aes(group = Species))
+
+
 
 
 
