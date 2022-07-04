@@ -314,9 +314,43 @@ ggplot(fish.species, aes(x = Year, y = Pink)) +
 ggplot(fish.tidy, aes(Year, Capture)) +
    geom_line(aes(group = Species))
 
-# Plot multiple time-series by coloring by species
+   # Plot multiple time-series by coloring by species
 ggplot(fish.tidy, aes(Year, Capture, color = Species)) +
    geom_line(aes(group = Species))
+
+
+#-----------------------------Moving the legend------------------------------------------
+#
+# Let's wrap up this course by making a publication-ready plot communicating a clear message.
+#
+# To change stylistic elements of a plot, call theme() and set plot properties to a new value.
+# For example, the following changes the legend position.
+#
+# p + theme(legend.position = new_value)
+# Here, the new value can be
+#
+# "top", "bottom", "left", or "right'": place it at that side of the plot.
+# "none": don't draw it.
+# c(x, y): c(0, 0) means the bottom-left and c(1, 1) means the top-right.
+# Let's revisit the recession period line plot (assigned to plt_prop_unemployed_over_time).
+#
+# Update the plot to remove the legend.
+# Look at the changes in the plot.
+# View the default plot
+plt_prop_unemployed_over_time
+
+# Remove legend entirely
+plt_prop_unemployed_over_time +
+  theme(legend.position = "none")
+
+
+
+
+
+
+
+
+
 
 
 
