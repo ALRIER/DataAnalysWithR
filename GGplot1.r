@@ -400,6 +400,62 @@ plt_prop_unemployed_over_time +
          linetype="dotted"
       )
    )
+# Make the axis tick labels' text, axis.text, less prominent by changing the color to "grey25".
+# Increase the plot.title's, size to 16 and change its font face to "italic".
+plt_prop_unemployed_over_time +
+   theme(
+      rect = element_rect(fill = "grey92"),
+      legend.key = element_rect(color = NA),
+      axis.ticks = element_blank(),
+      panel.grid = element_blank(),
+      panel.grid.major.y = element_line(
+         color = "white",
+         size = 0.5,
+         linetype = "dotted"
+      ),
+      # Set the axis text color to grey25
+      axis.text=element_text(color="grey25"),
+      # Set the plot title font face to italic and font size to 16
+      plot.title=element_text(size=16, face="italic")
+   )
+
+#------------------------------Modifying whitespace-----------------------------------------
+
+# Whitespace means all the non-visible margins and spacing in the plot.
+#
+# To set a single whitespace value, use unit(x, unit), where x is the amount and unit is
+# the unit of measure.
+#
+# Borders require you to set 4 positions, so use margin(top, right, bottom, left, unit).
+# To remember the margin order, think TRouBLe.
+#
+# The default unit is "pt" (points), which scales well with text. Other options include "cm",
+# "in" (inches) and "lines" (of text).
+#
+# plt_mpg_vs_wt_by_cyl is available. The panel and legend are wrapped in blue boxes so you
+# can see how they change.
+
+# Give the axis tick length, axis.ticks.length, a unit of 2 "lines"
+# View the original plot
+plt_mpg_vs_wt_by_cyl
+
+plt_mpg_vs_wt_by_cyl +
+   theme(
+      # Set the axis tick length to 2 lines
+      axis.ticks.length = unit(2, "lines")
+   )
+# Give the legend key size, legend.key.size, a unit of 3 centimeters ("cm").
+plt_mpg_vs_wt_by_cyl +
+   theme(
+      # Set the legend key size to 3 centimeters
+      legend.key.size=unit(3,"cm")
+   )
+
+
+
+
+
+
 
 
 
