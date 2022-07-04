@@ -450,7 +450,18 @@ plt_mpg_vs_wt_by_cyl +
       # Set the legend key size to 3 centimeters
       legend.key.size=unit(3,"cm")
    )
-
+#poner margener en 20,30,40 y 50.
+plt_mpg_vs_wt_by_cyl +
+theme(
+   # Set the legend margin to (20, 30, 40, 50) points
+   legend.margin=margin(20, 30, 40, 50, "pt")
+)
+Ahora cambiar las margenes y la medida a milimetros.
+plt_mpg_vs_wt_by_cyl +
+   theme(
+      # Set the plot margin to (10, 30, 50, 70) millimeters
+      plot.margin=margin(10, 30, 50, 70, "mm")
+   )
 
 
 
