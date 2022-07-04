@@ -342,7 +342,64 @@ plt_prop_unemployed_over_time
 # Remove legend entirely
 plt_prop_unemployed_over_time +
   theme(legend.position = "none")
+# Position the legend at the bottom of the plot
+plt_prop_unemployed_over_time +
+   theme(legend.position = "bottom")
+# Position the legend inside the plot at (0.6, 0.1)
+plt_prop_unemployed_over_time +
+   theme(legend.position = c(0.6, 0.1))
 
+#--------------------------------------Modifying theme elements----------------------------
+
+Many plot elements have multiple properties that can be set. For example,
+line elements in the plot such as axes and gridlines have a color, a thickness (size),
+and a line type (solid line, dashed, or dotted). To set the style of a line,
+you use element_line(). For example, to make the axis lines into red, dashed lines,
+you would use the following.
+
+p + theme(axis.line = element_line(color = "red", linetype = "dashed"))
+Similarly, element_rect() changes rectangles and element_text() changes text.
+You can remove a plot element using element_blank().
+
+plt_prop_unemployed_over_time is available.
+
+plt_prop_unemployed_over_time +
+   theme(
+      # For all rectangles, set the fill color to grey92
+      rect = element_rect(fill="grey92"),
+      # For the legend key, turn off the outline
+      legend.key = element_rect(color=NA)
+   )
+# Remove the axis ticks, axis.ticks by making them a blank element.
+# Remove the panel gridlines, panel.grid in the same way.
+# Look at the changes in the plot.
+plt_prop_unemployed_over_time +
+   theme(
+      rect = element_rect(fill = "grey92"),
+      legend.key = element_rect(color = NA),
+      # Turn off axis ticks
+      axis.ticks=element_blank(),
+      # Turn off the panel grid
+      panel.grid =element_blank()
+   )
+# Add the major horizontal grid lines back to the plot using panel.grid.major.y.
+# Set the line color to "white", size to 0.5, and linetype to "dotted"
+plt_prop_unemployed_over_time +
+   theme(
+      rect = element_rect(fill = "grey92"),
+      legend.key = element_rect(color = NA),
+      axis.ticks = element_blank(),
+      panel.grid = element_blank(),
+      # Add major y-axis panel grid lines back
+      panel.grid.major.y = element_line (
+         # Set the color to white
+         color="white",
+         # Set the size to 0.5
+         size= 0.5,
+         # Set the line type to dotted
+         linetype="dotted"
+      )
+   )
 
 
 
